@@ -13,7 +13,7 @@
   <script>
     async function fetchStories() {
       const username = document.getElementById('username').value;
-      const res = await fetch(`/api/stories/${username}`);
+const res = await fetch(`https://insta-pcq9.onrender.com/api/stories/${username}`);
       const data = await res.json();
       const container = document.getElementById('stories');
       container.innerHTML = '';
