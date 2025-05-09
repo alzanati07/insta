@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: instagram-scraper
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: IG_USERNAME
+        value: alzanatitik
+      - key: IG_PASSWORD
+        value: 12345678z
