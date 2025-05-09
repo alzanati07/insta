@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import instaloader
+import os
 
 app = Flask(__name__)
 L = instaloader.Instaloader()
@@ -12,7 +13,7 @@ def index():
 
         try:
             profile = instaloader.Profile.from_username(L.context, target_username)
-            posts = [post.url for post in profile.get_posts()[:5]]
+            posts = [post.url for post in profile.get_posts()[:5]]  # Top 5 posts
 
             for story in L.get_stories(userids=[profile.userid]):
                 for item in story.get_items():
@@ -26,3 +27,6 @@ def index():
             print(f"Error: {e}")
 
     return render_template("index.html", posts=posts, stories=stories, highlights=highlights)
+
+# لا تستخدم app.run هنا في بيئة الإنتاج
+
