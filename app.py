@@ -28,7 +28,6 @@ def index():
 
     return render_template("index.html", posts=posts, stories=stories, highlights=highlights)
 
+# لا تحتاج إلى استخدام app.run() في بيئة الإنتاج، هذه الخطوة ستتم عبر gunicorn في الخطوات التالية
 if __name__ == "__main__":
-    # تحديد المنفذ من البيئة (Port الذي توفره Render)
-    port = int(os.environ.get("PORT", 5000))  # تحديد المنفذ من متغير البيئة
-    app.run(host="0.0.0.0", port=port)  # استماع على جميع العناوين
+    app.run(debug=True)  # يمكن تركه في بيئة تطوير محلية فقط
