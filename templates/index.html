@@ -1,37 +1,29 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Instagram Viewer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Instagram Viewer</h1>
+    <h1>View Instagram Content</h1>
     <form method="POST">
-        <input type="text" name="target_username" placeholder="Enter Instagram Username" required>
-        <button type="submit">Fetch</button>
+        <input type="text" name="target_username" placeholder="Enter username" required>
+        <button type="submit">Get Data</button>
     </form>
 
-    {% if posts %}
-        <h2>Posts</h2>
-        {% for post in posts %}
-            <img src="{{ post }}" width="200"><br>
-        {% endfor %}
-    {% endif %}
+    <h2>Posts</h2>
+    {% for post in posts %}
+        <img src="{{ post }}" alt="Post" width="200"><br>
+    {% endfor %}
 
-    {% if stories %}
-        <h2>Stories</h2>
-        {% for story in stories %}
-            <img src="{{ story }}" width="200"><br>
-        {% endfor %}
-    {% endif %}
+    <h2>Stories</h2>
+    {% for story in stories %}
+        <img src="{{ story }}" alt="Story" width="200"><br>
+    {% endfor %}
 
-    {% if highlights %}
-        <h2>Highlights</h2>
-        {% for h in highlights %}
-            <img src="{{ h }}" width="200"><br>
-        {% endfor %}
-    {% endif %}
+    <h2>Highlights</h2>
+    {% for highlight in highlights %}
+        <img src="{{ highlight }}" alt="Highlight" width="200"><br>
+    {% endfor %}
 </body>
 </html>
