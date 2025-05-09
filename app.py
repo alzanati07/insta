@@ -28,5 +28,7 @@ def index():
 
     return render_template("index.html", posts=posts, stories=stories, highlights=highlights)
 
-# لا تشغل التطبيق من هنا في بيئة الإنتاج
-# سيتم تشغيله بواسطة gunicorn من خلال Procfile
+if __name__ == "__main__":
+    # تحديد المنفذ الذي توفره Render أو استخدام المنفذ الافتراضي 5000
+    port = int(os.environ.get("PORT", 5000))  # تحديد المنفذ
+    app.run(host="0.0.0.0", port=port)  # استمع على المنفذ المحدد
