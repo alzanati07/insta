@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Environment variables
+.env
+
+# Python virtual environments
+venv/
+ENV/
+env/
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Instaloader session files
+*.session
+
+# Local config
+*.local
+
+# Static files cache
+staticfiles/
+
+# Database files
+*.sqlite3
+
+# Render deploy logs
+render.yaml
+
+# Node (if ever using frontend tools)
+node_modules/
