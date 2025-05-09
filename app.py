@@ -1,31 +1,17 @@
 from flask import Flask, render_template, request
 import instaloader
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 L = instaloader.Instaloader()
 
-# إعداد بروكسي (بدّله عند الحاجة)
-L.context.proxy = "http://185.199.229.156:7492"
+proxy_user = os.getenv("PROXY_USER")
+proxy_pass = os.getenv("PROXY_PASS")
+proxy_host = os.getenv("PROXY_HOST")
+proxy_port = os.getenv("PROXY_PORT")
+proxy_url = f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}"
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    posts, stories, highlights = [], [], []
-    if request.method == "POST":
-        target_username = request.form["target_username"]
-
-        try:
-            profile = instaloader.Profile.from_username(L.context, target_username)
-            posts = [post.url for post in profile.get_posts()[:5]]
-
-            for story in L.get_stories(userids=[profile.userid]):
-                for item in story.get_items():
-                    stories.append(item.url)
-
-            for highlight in profile.get_highlights():
-                for item in highlight.get_items():
-                    highlights.append(item.url)
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-    return render_template("index.html", posts=posts, stories=stories, highlights=highlights)
+L.context.proxy = proxy_url
