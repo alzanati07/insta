@@ -1,22 +1,11 @@
 from flask import Flask, render_template, request
 import instaloader
-import os
-from dotenv import load_dotenv
-
-# تحميل متغيرات البيئة من .env
-load_dotenv()
 
 app = Flask(__name__)
 L = instaloader.Instaloader()
 
-# تسجيل الدخول بالحساب الوهمي
-IG_USERNAME = os.getenv("IG_USERNAME")
-IG_PASSWORD = os.getenv("IG_PASSWORD")
-
-try:
-    L.login(IG_USERNAME, IG_PASSWORD)
-except Exception as e:
-    print(f"فشل تسجيل الدخول: {e}")
+# إعداد بروكسي (بدّله عند الحاجة)
+L.context.proxy = "http://185.199.229.156:7492"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
