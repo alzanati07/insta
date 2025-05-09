@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request
 import instaloader
 
@@ -27,6 +26,3 @@ def index():
             print(f"Error: {e}")
 
     return render_template("index.html", posts=posts, stories=stories, highlights=highlights)
-
-if __name__ == "__main__":
-    app.run(debug=True)
