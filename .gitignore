@@ -43,3 +43,6 @@ render.yaml
 
 # Node (if ever using frontend tools)
 node_modules/
+
+# CA Certificate file
+ca.crt
