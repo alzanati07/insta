@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import instaloader
 import os
 import base64
+import certifi  # إضافة مكتبة certifi
 
 app = Flask(__name__)
 
@@ -20,6 +21,9 @@ if ca_cert:
 # ✅ تحميل بيانات الحساب من البيئة
 IG_USERNAME = os.getenv("INSTAGRAM_USERNAME")
 IG_PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
+
+# ✅ تحديد الشهادة الجذرية من certifi
+os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
 
 # ✅ إعداد Instaloader مع الشهادة
 L = instaloader.Instaloader()
