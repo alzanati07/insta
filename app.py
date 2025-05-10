@@ -7,12 +7,15 @@ app = Flask(__name__)
 
 # ✅ حفظ شهادة SSL من المتغير البيئي (مشفّرة base64)
 ca_cert = os.environ.get("CA_CERT", "")
+crt_path = "ca.crt"
+
 if ca_cert:
     try:
         decoded_cert = base64.b64decode(ca_cert.encode())
-        with open("ca.crt", "wb") as f:  # حفظ بصيغة ثنائية
+        with open(crt_path, "wb") as f:  # حفظ بصيغة ثنائية
             f.write(decoded_cert)
-        print("✅ تم فك تشفير الشهادة وحفظها بنجاح")
+        os.environ["REQUESTS_CA_BUNDLE"] = crt_path  # 🔑 ضبط الشهادة للـ requests
+        print("✅ تم فك تشفير الشهادة وحفظها وتسجيلها في REQUESTS_CA_BUNDLE")
     except Exception as e:
         print(f"⚠️ فشل فك تشفير الشهادة: {e}")
 
@@ -33,10 +36,8 @@ if all([PROXY_USER, PROXY_PASS, PROXY_HOST, PROXY_PORT]):
 else:
     print("⚠️ لم يتم ضبط إعدادات البروكسي بشكل صحيح")
 
-# ✅ إعداد Instaloader مع الشهادة
+# ✅ إعداد Instaloader
 L = instaloader.Instaloader()
-if ca_cert:
-    L.context._session.verify = "ca.crt"
 
 # ✅ تسجيل الدخول
 try:
