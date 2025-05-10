@@ -1,14 +1,19 @@
 from flask import Flask, render_template, request
 import instaloader
 import os
+import base64
 
 app = Flask(__name__)
 
-# ✅ حفظ شهادة SSL من المتغير البيئي
+# ✅ حفظ شهادة SSL من المتغير البيئي (مشفّرة base64)
 ca_cert = os.environ.get("CA_CERT", "")
 if ca_cert:
-    with open("ca.crt", "w") as f:
-        f.write(ca_cert)
+    try:
+        decoded_cert = base64.b64decode(ca_cert.encode()).decode()
+        with open("ca.crt", "w") as f:
+            f.write(decoded_cert)
+    except Exception as e:
+        print(f"⚠️ فشل فك تشفير الشهادة: {e}")
 
 # ✅ تحميل بيانات الحساب والبروكسي من البيئة
 IG_USERNAME = os.getenv("INSTAGRAM_USERNAME")
