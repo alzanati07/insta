@@ -3,27 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Instagram Viewer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>View Instagram Content</h1>
-    <form method="POST">
-        <input type="text" name="target_username" placeholder="Enter username" required>
-        <button type="submit">Get Data</button>
+<body class="bg-light">
+
+<div class="container py-5">
+    <h1 class="text-center mb-4">Instagram Viewer</h1>
+
+    <form method="POST" class="mb-5">
+        <div class="input-group">
+            <input type="text" name="target_username" class="form-control" placeholder="Enter Instagram username" required>
+            <button type="submit" class="btn btn-primary">Get Data</button>
+        </div>
     </form>
 
-    <h2>Posts</h2>
-    {% for post in posts %}
-        <img src="{{ post }}" alt="Post" width="200"><br>
-    {% endfor %}
+    {% if posts %}
+    <h2 class="mb-3">Posts</h2>
+    <div class="row g-3 mb-4">
+        {% for post in posts %}
+        <div class="col-md-3 col-sm-6">
+            <img src="{{ post }}" alt="Post" class="img-fluid rounded shadow-sm" loading="lazy">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-    <h2>Stories</h2>
-    {% for story in stories %}
-        <img src="{{ story }}" alt="Story" width="200"><br>
-    {% endfor %}
+    {% if stories %}
+    <h2 class="mb-3">Stories</h2>
+    <div class="row g-3 mb-4">
+        {% for story in stories %}
+        <div class="col-md-3 col-sm-6">
+            <img src="{{ story }}" alt="Story" class="img-fluid rounded shadow-sm" loading="lazy">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-    <h2>Highlights</h2>
-    {% for highlight in highlights %}
-        <img src="{{ highlight }}" alt="Highlight" width="200"><br>
-    {% endfor %}
+    {% if highlights %}
+    <h2 class="mb-3">Highlights</h2>
+    <div class="row g-3">
+        {% for highlight in highlights %}
+        <div class="col-md-3 col-sm-6">
+            <img src="{{ highlight }}" alt="Highlight" class="img-fluid rounded shadow-sm" loading="lazy">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
+
 </body>
 </html>
