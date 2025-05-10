@@ -18,8 +18,8 @@ if ca_cert:
         print(f"⚠️ فشل فك تشفير الشهادة: {e}")
 
 # ✅ تعيين بيانات الحساب والبروكسي يدويًا في الكود
-IG_USERNAME = alzanatitik@gmail.com
-IG_PASSWORD = 12345678z
+IG_USERNAME = "alzanatitik@gmail.com"
+IG_PASSWORD = "12345678z"
 
 PROXY_HOST = os.getenv("PROXY_HOST")
 PROXY_PORT = os.getenv("PROXY_PORT")
